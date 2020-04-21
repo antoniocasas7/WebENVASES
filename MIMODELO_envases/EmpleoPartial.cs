@@ -23,20 +23,17 @@ namespace MIMODELO_envases
             {
                 using (var context = new ENVASESEntities())
                 {
-                    var result = await Task.Run(async () =>
-                    {
-                       context.Empleos.Add(empleo);
-                       await context.SaveChangesAsync();
-                        return true;
-                    });
+
+                    context.Empleos.Add(empleo);
+                    await context.SaveChangesAsync();
                     return true;
                 }
-
             }
             catch (Exception e)
-            {               
-               // throw new Exception(e.Message);
+            {
                 return false;
+                throw new Exception(e.Message);
+
             }
         }
 
@@ -46,15 +43,12 @@ namespace MIMODELO_envases
             {
                 using (var context = new ENVASESEntities())
                 {
-                    var result = await Task.Run(() =>
-                    {
-                        return context.Empleos.ToListAsync();
-                    });
-                    return result;
+                    return await context.Empleos.ToListAsync();
                 }
             }
             catch (Exception e)
             {
+                return null;
                 throw new Exception(e.Message);
             }
         }
@@ -65,18 +59,14 @@ namespace MIMODELO_envases
             {
                 using (var context = new ENVASESEntities())
                 {
-                    var result = await Task.Run(() =>
-                    {
-                        context.Entry(empleo).State = EntityState.Modified;
-                        context.SaveChangesAsync();
-                        return empleo;
-                    });
+                    context.Entry(empleo).State = EntityState.Modified;
+                    await context.SaveChangesAsync();
+                    return empleo;
                 }
-
-                return null;
             }
             catch (Exception e)
             {
+                return null;
                 throw new Exception(e.Message);
             }
         }
@@ -90,18 +80,17 @@ namespace MIMODELO_envases
                     var empleo = this.Details(id);
                     if (empleo != null)
                     {
-                        var result = await Task.Run(() =>
-                        {
-                            context.Entry(empleo).State = EntityState.Modified;
-                            context.SaveChangesAsync();
-                            return empleo;
-                        });
+                        context.Entry(empleo).State = EntityState.Modified;
+                        await context.SaveChangesAsync();
+                        return empleo.Result;
                     }
-                    return null;
+                    else
+                        return null;
                 }
             }
             catch (Exception e)
             {
+                return null;
                 throw new Exception(e.Message);
             }
         }
@@ -112,15 +101,14 @@ namespace MIMODELO_envases
             {
                 using (var context = new ENVASESEntities())
                 {
-                    var result = await Task.Run(() =>
-                    {
-                        return context.Empleos.FindAsync(id);
-                    });
+                    // return await context.Empleos.FindAsync(id);
+                    return await context.Empleos.Include("Empleados").FirstOrDefaultAsync(c => c.Id == id);
                 }
-                return null;
+
             }
             catch (Exception e)
             {
+                return null;
                 throw new Exception(e.Message);
             }
         }
@@ -131,51 +119,20 @@ namespace MIMODELO_envases
             {
                 using (var context = new ENVASESEntities())
                 {
-                    var result = await Task.Run(() =>
-                    {
-                        context.Empleos.Remove(empleo);
-                        context.SaveChangesAsync();
-                        return empleo;
-                    });
-                    return null;
+                    context.Empleos.Attach(empleo);
+                    context.Empleos.Remove(empleo);
+                    await context.SaveChangesAsync();
+                    return empleo;
                 }
             }
             catch (Exception e)
             {
+                return null;
                 throw new Exception(e.Message);
-            }
-
-            //db.Empleos.Remove(empleo);
-            //await db.SaveChangesAsync();
+            }          
         }
 
-        //public Task<bool> DeleteById(int? id)
-        //{
-        //try
-        //{
-        //    using (var context = new ENVASESEntities())
-        //    {
-        //        var result = await Task.Run(async () =>
-        //        {
-        //            //Empleo empleo = await db.Empleos.FindAsync(id);
-        //            //db.Empleos.Remove(empleo);
-        //            //await db.SaveChangesAsync();
-        //            //return RedirectToAction("Index");
 
-        //            context.Empleos.Add(empleo);
-        //            await context.SaveChangesAsync();
-        //            return true;
-        //        });
-
-        //        return false;
-        //    }
-
-        //}
-        //catch (Exception e)
-        //{
-        //    throw new Exception(e.Message);
-        //}
-        //}
 
         //public PersonaAnimal NuevoEditar(string dni)
         //{

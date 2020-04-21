@@ -124,7 +124,7 @@ namespace WEB_MVC_FRONT.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Empleo empleo = await varEmpleo.Details(id);
-            if (varEmpleo != null)
+            if (empleo != null)
                 await varEmpleo.DeleteByEmpleo(empleo);
 
             //Empleo empleo = await db.Empleos.FindAsync(id);
