@@ -1,0 +1,57 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Desarrollo\\EJEMPLOS VS\\WEB_MBVC_FRONT\\MIMODELO_envases\\MIMODELO_envases.csproj": {}
+  },
+  "projects": {
+    "C:\\Desarrollo\\EJEMPLOS VS\\WEB_MBVC_FRONT\\MIMODELO_envases\\MIMODELO_envases.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Desarrollo\\EJEMPLOS VS\\WEB_MBVC_FRONT\\MIMODELO_envases\\MIMODELO_envases.csproj",
+        "projectName": "MIMODELO_envases",
+        "projectPath": "C:\\Desarrollo\\EJEMPLOS VS\\WEB_MBVC_FRONT\\MIMODELO_envases\\MIMODELO_envases.csproj",
+        "packagesPath": "C:\\Users\\Juan\\.nuget\\packages\\",
+        "outputPath": "C:\\Desarrollo\\EJEMPLOS VS\\WEB_MBVC_FRONT\\MIMODELO_envases\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "configFilePaths": [
+          "C:\\Users\\Juan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.2.0, )"
+            }
+          }
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

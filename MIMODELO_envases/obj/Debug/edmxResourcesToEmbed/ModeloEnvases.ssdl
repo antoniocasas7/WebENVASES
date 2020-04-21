@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ENVASESModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Almacen_Articulo">
+    <Key>
+      <PropertyRef Name="Id_Almacen" />
+      <PropertyRef Name="Id_Articulo" />
+    </Key>
+    <Property Name="Id_Almacen" Type="int" Nullable="false" />
+    <Property Name="Id_Articulo" Type="int" Nullable="false" />
+    <Property Name="Fecha_Entrada" Type="date" Nullable="false" />
+    <Property Name="Fecha_Salida" Type="date" />
+    <Property Name="Cantidad" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Almacenes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Articulos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Empleados">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="30" />
+    <Property Name="Apellidos" Type="nvarchar" MaxLength="50" />
+    <Property Name="Id_Empleo" Type="int" />
+  </EntityType>
+  <EntityType Name="Empleos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ENVASES.dbo.vista_empleados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="vista_empleados">
+    <Key>
+      <PropertyRef Name="ID_EMPLEADO" />
+    </Key>
+    <Property Name="ID_EMPLEADO" Type="int" Nullable="false" />
+    <Property Name="NOMBRE_EMPLEADO" Type="nvarchar" MaxLength="30" />
+    <Property Name="NOMBRE_EMPLEO" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_EMPLEOS">
+    <End Role="Empleos" Type="Self.Empleos" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="Id_Empleo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="proc_Almacen_Articulo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id_Almacen" Type="int" Mode="In" />
+  </Function>
+  <Function Name="proc_empleados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Nombre_Empleado" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="ENVASESModelStoreContainer">
+    <EntitySet Name="Almacen_Articulo" EntityType="Self.Almacen_Articulo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Almacenes" EntityType="Self.Almacenes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Articulos" EntityType="Self.Articulos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Empleos" EntityType="Self.Empleos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vista_empleados" EntityType="Self.vista_empleados" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vista_empleados].[ID_EMPLEADO] AS [ID_EMPLEADO], 
+    [vista_empleados].[NOMBRE_EMPLEADO] AS [NOMBRE_EMPLEADO], 
+    [vista_empleados].[NOMBRE_EMPLEO] AS [NOMBRE_EMPLEO]
+    FROM [dbo].[vista_empleados] AS [vista_empleados]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_EMPLEOS" Association="Self.FK_EMPLEOS">
+      <End Role="Empleos" EntitySet="Empleos" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

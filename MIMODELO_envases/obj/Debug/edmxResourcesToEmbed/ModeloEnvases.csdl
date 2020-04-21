@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ENVASESModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Almacen_Articulo">
+    <Key>
+      <PropertyRef Name="Id_Almacen" />
+      <PropertyRef Name="Id_Articulo" />
+    </Key>
+    <Property Name="Id_Almacen" Type="Int32" Nullable="false" />
+    <Property Name="Id_Articulo" Type="Int32" Nullable="false" />
+    <Property Name="Fecha_Entrada" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Fecha_Salida" Type="DateTime" Precision="0" />
+    <Property Name="Cantidad" Type="Decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Almacene">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Articulo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Empleado">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Id_Empleo" Type="Int32" />
+    <NavigationProperty Name="Empleo" Relationship="Self.FK_EMPLEOS" FromRole="Empleados" ToRole="Empleos" />
+  </EntityType>
+  <EntityType Name="Empleo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Empleados" Relationship="Self.FK_EMPLEOS" FromRole="Empleos" ToRole="Empleados" />
+  </EntityType>
+  <EntityType Name="vista_empleados">
+    <Key>
+      <PropertyRef Name="ID_EMPLEADO" />
+    </Key>
+    <Property Name="ID_EMPLEADO" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE_EMPLEADO" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="NOMBRE_EMPLEO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_EMPLEOS">
+    <End Role="Empleos" Type="Self.Empleo" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Empleados" Type="Self.Empleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="Id_Empleo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ENVASESEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Almacen_Articulo" EntityType="Self.Almacen_Articulo" />
+    <EntitySet Name="Almacenes" EntityType="Self.Almacene" />
+    <EntitySet Name="Articulos" EntityType="Self.Articulo" />
+    <EntitySet Name="Empleados" EntityType="Self.Empleado" />
+    <EntitySet Name="Empleos" EntityType="Self.Empleo" />
+    <EntitySet Name="vista_empleados" EntityType="Self.vista_empleados" />
+    <AssociationSet Name="FK_EMPLEOS" Association="Self.FK_EMPLEOS">
+      <End Role="Empleos" EntitySet="Empleos" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
+    <FunctionImport Name="proc_Almacen_Articulo" ReturnType="Collection(ENVASESModel.proc_Almacen_Articulo_Result)">
+      <Parameter Name="Id_Almacen" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="proc_empleados" ReturnType="Collection(ENVASESModel.proc_empleados_Result)">
+      <Parameter Name="Nombre_Empleado" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="proc_Almacen_Articulo_Result">
+    <Property Type="Int32" Name="Id_Almacen" Nullable="false" />
+    <Property Type="Int32" Name="Id_Articulo" Nullable="false" />
+    <Property Type="DateTime" Name="Fecha_Entrada" Nullable="false" />
+    <Property Type="DateTime" Name="Fecha_Salida" Nullable="true" />
+    <Property Type="Decimal" Name="Cantidad" Nullable="true" Precision="18" Scale="0" />
+  </ComplexType>
+  <ComplexType Name="proc_empleados_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Apellidos" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Id_Empleo" Nullable="true" />
+  </ComplexType>
+</Schema>

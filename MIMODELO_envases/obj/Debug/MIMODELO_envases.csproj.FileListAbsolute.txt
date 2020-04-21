@@ -1,0 +1,10 @@
+C:\Desarrollo\EJEMPLOS VS\WEB_MBVC_FRONT\MIMODELO_envases\bin\Debug\MIMODELO_envases.dll.config
+C:\Desarrollo\EJEMPLOS VS\WEB_MBVC_FRONT\MIMODELO_envases\bin\Debug\MIMODELO_envases.dll
+C:\Desarrollo\EJEMPLOS VS\WEB_MBVC_FRONT\MIMODELO_envases\bin\Debug\MIMODELO_envases.pdb
+C:\Desarrollo\EJEMPLOS VS\WEB_MBVC_FRONT\MIMODELO_envases\bin\Debug\EntityFramework.SqlServer.dll
+C:\Desarrollo\EJEMPLOS VS\WEB_MBVC_FRONT\MIMODELO_envases\bin\Debug\EntityFramework.dll
+C:\Desarrollo\EJEMPLOS VS\WEB_MBVC_FRONT\MIMODELO_envases\obj\Debug\MIMODELO_envases.csproj.CoreCompileInputs.cache
+C:\Desarrollo\EJEMPLOS VS\WEB_MBVC_FRONT\MIMODELO_envases\obj\Debug\MIMODELO_envases.csproj.CopyComplete
+C:\Desarrollo\EJEMPLOS VS\WEB_MBVC_FRONT\MIMODELO_envases\obj\Debug\MIMODELO_envases.dll
+C:\Desarrollo\EJEMPLOS VS\WEB_MBVC_FRONT\MIMODELO_envases\obj\Debug\MIMODELO_envases.pdb
+C:\Desarrollo\EJEMPLOS VS\WEB_MBVC_FRONT\MIMODELO_envases\obj\Debug\MIMODELO_envases.csprojAssemblyReference.cache

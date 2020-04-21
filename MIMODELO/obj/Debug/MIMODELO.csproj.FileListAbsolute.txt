@@ -1,0 +1,10 @@
+C:\Desarrollo\EJEMPLOS VS\WEB_MBVC_FRONT\MIMODELO\bin\Debug\MIMODELO.dll.config
+C:\Desarrollo\EJEMPLOS VS\WEB_MBVC_FRONT\MIMODELO\bin\Debug\MIMODELO.dll
+C:\Desarrollo\EJEMPLOS VS\WEB_MBVC_FRONT\MIMODELO\bin\Debug\MIMODELO.pdb
+C:\Desarrollo\EJEMPLOS VS\WEB_MBVC_FRONT\MIMODELO\bin\Debug\EntityFramework.SqlServer.dll
+C:\Desarrollo\EJEMPLOS VS\WEB_MBVC_FRONT\MIMODELO\bin\Debug\EntityFramework.dll
+C:\Desarrollo\EJEMPLOS VS\WEB_MBVC_FRONT\MIMODELO\obj\Debug\MIMODELO.csprojAssemblyReference.cache
+C:\Desarrollo\EJEMPLOS VS\WEB_MBVC_FRONT\MIMODELO\obj\Debug\MIMODELO.csproj.CoreCompileInputs.cache
+C:\Desarrollo\EJEMPLOS VS\WEB_MBVC_FRONT\MIMODELO\obj\Debug\MIMODELO.csproj.CopyComplete
+C:\Desarrollo\EJEMPLOS VS\WEB_MBVC_FRONT\MIMODELO\obj\Debug\MIMODELO.dll
+C:\Desarrollo\EJEMPLOS VS\WEB_MBVC_FRONT\MIMODELO\obj\Debug\MIMODELO.pdb
