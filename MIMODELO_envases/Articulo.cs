@@ -16,6 +16,12 @@ namespace MIMODELO_envases
 
     public partial class Articulo
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Articulo()
+        {
+            this.Almacen_Articulo = new HashSet<Almacen_Articulo>();
+        }
+
         [Key]
         [Required(ErrorMessage = " El Id es requerido")]
         public int Id { get; set; }
@@ -24,5 +30,8 @@ namespace MIMODELO_envases
         [Required(ErrorMessage = " El Nombre es requerido")]
         [DisplayName("Nombre Articulo")]
         public string Nombre { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Almacen_Articulo> Almacen_Articulo { get; set; }
     }
 }

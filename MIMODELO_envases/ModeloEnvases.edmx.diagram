@@ -5,13 +5,15 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="bdbe176211244bfab96f7240ea99ea8f" Name="Diagram1">
-        <EntityTypeShape EntityType="ENVASESModel.Almacen_Articulo" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ENVASESModel.Almacene" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ENVASESModel.Articulo" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ENVASESModel.Empleado" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ENVASESModel.Empleo" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ENVASESModel.vista_empleados" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="ENVASESModel.FK_EMPLEOS" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ENVASESModel.Almacen_Articulo" Width="1.5" PointX="3.125" PointY="1.75" />
+        <EntityTypeShape EntityType="ENVASESModel.Almacene" Width="1.5" PointX="0.5" PointY="1.375" />
+        <EntityTypeShape EntityType="ENVASESModel.Articulo" Width="1.5" PointX="5.25" PointY="1.25" />
+        <EntityTypeShape EntityType="ENVASESModel.Empleado" Width="1.5" PointX="4.75" PointY="4.375" />
+        <EntityTypeShape EntityType="ENVASESModel.Empleo" Width="1.5" PointX="1" PointY="4.25" />
+        <EntityTypeShape EntityType="ENVASESModel.vista_empleados" Width="1.5" PointX="7.5" PointY="1.25" />
+        <AssociationConnector Association="ENVASESModel.FK__Almacen_A__Id_Al__4D94879B" />
+        <AssociationConnector Association="ENVASESModel.FK__Almacen_A__Id_Ar__4CA06362" />
+        <AssociationConnector Association="ENVASESModel.FK_EMPLEOS" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

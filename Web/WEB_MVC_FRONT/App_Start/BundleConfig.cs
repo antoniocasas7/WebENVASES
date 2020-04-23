@@ -24,7 +24,19 @@ namespace WEB_MVC_FRONT
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css")); 
+          
+            // Añado el js que yo he creado
+            bundles.Add(new ScriptBundle("~/bundles/MenuLateral").Include(
+                     "~/barra_lateral/gulpfile.js",
+                     "~/barra_lateral/src/js/main.js"));
+
+            bundles.Add(new StyleBundle("~/barra_lateral/css").Include(
+                     "~/barra_lateral/src/css/*.css")); // Añado el que yo he creado
+
+
+            bundles.Add(new StyleBundle("~/barra_lateral/sass").Include(
+                     "~/barra_lateral/src/sass/*.scss")); // Añado el que yo he creado
         }
     }
 }

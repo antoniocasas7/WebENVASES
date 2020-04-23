@@ -51,6 +51,30 @@ advertencia 6002: La tabla o vista 'ENVASES.dbo.vista_empleados' no tiene defini
     <Property Name="NOMBRE_EMPLEADO" Type="nvarchar" MaxLength="30" />
     <Property Name="NOMBRE_EMPLEO" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <Association Name="FK__Almacen_A__Id_Al__4D94879B">
+    <End Role="Almacenes" Type="Self.Almacenes" Multiplicity="1" />
+    <End Role="Almacen_Articulo" Type="Self.Almacen_Articulo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Almacenes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Almacen_Articulo">
+        <PropertyRef Name="Id_Almacen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Almacen_A__Id_Ar__4CA06362">
+    <End Role="Articulos" Type="Self.Articulos" Multiplicity="1" />
+    <End Role="Almacen_Articulo" Type="Self.Almacen_Articulo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Articulos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Almacen_Articulo">
+        <PropertyRef Name="Id_Articulo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_EMPLEOS">
     <End Role="Empleos" Type="Self.Empleos" Multiplicity="0..1">
       <OnDelete Action="Cascade" />
@@ -84,6 +108,14 @@ advertencia 6002: La tabla o vista 'ENVASES.dbo.vista_empleados' no tiene defini
     [vista_empleados].[NOMBRE_EMPLEO] AS [NOMBRE_EMPLEO]
     FROM [dbo].[vista_empleados] AS [vista_empleados]</DefiningQuery>
     </EntitySet>
+    <AssociationSet Name="FK__Almacen_A__Id_Al__4D94879B" Association="Self.FK__Almacen_A__Id_Al__4D94879B">
+      <End Role="Almacenes" EntitySet="Almacenes" />
+      <End Role="Almacen_Articulo" EntitySet="Almacen_Articulo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Almacen_A__Id_Ar__4CA06362" Association="Self.FK__Almacen_A__Id_Ar__4CA06362">
+      <End Role="Articulos" EntitySet="Articulos" />
+      <End Role="Almacen_Articulo" EntitySet="Almacen_Articulo" />
+    </AssociationSet>
     <AssociationSet Name="FK_EMPLEOS" Association="Self.FK_EMPLEOS">
       <End Role="Empleos" EntitySet="Empleos" />
       <End Role="Empleados" EntitySet="Empleados" />

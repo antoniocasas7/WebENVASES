@@ -13,16 +13,15 @@ namespace MIMODELO_envases
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
 
-   
-    public partial class Empleo 
+    public partial class Empleo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Empleo()
         {
             this.Empleados = new HashSet<Empleado>();
         }
+
         [Key]
         [Required(ErrorMessage = " El Id es requerido")]
         public int Id { get; set; }
@@ -31,7 +30,7 @@ namespace MIMODELO_envases
         [Required(ErrorMessage = " El nombre es requerido")]
         [DisplayName("Nombre Empleo")]
         public string Nombre { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Empleado> Empleados { get; set; }
     }

@@ -1,60 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ENVASESModelStoreContainer" CdmEntityContainer="ENVASESEntities">
-    <EntitySetMapping Name="Almacen_Articulo">
-      <EntityTypeMapping TypeName="ENVASESModel.Almacen_Articulo">
-        <MappingFragment StoreEntitySet="Almacen_Articulo">
-          <ScalarProperty Name="Id_Almacen" ColumnName="Id_Almacen" />
-          <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
-          <ScalarProperty Name="Fecha_Entrada" ColumnName="Fecha_Entrada" />
-          <ScalarProperty Name="Fecha_Salida" ColumnName="Fecha_Salida" />
-          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Almacenes">
-      <EntityTypeMapping TypeName="ENVASESModel.Almacene">
-        <MappingFragment StoreEntitySet="Almacenes">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Articulos">
-      <EntityTypeMapping TypeName="ENVASESModel.Articulo">
-        <MappingFragment StoreEntitySet="Articulos">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Empleados">
-      <EntityTypeMapping TypeName="ENVASESModel.Empleado">
-        <MappingFragment StoreEntitySet="Empleados">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-          <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
-          <ScalarProperty Name="Id_Empleo" ColumnName="Id_Empleo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Empleos">
-      <EntityTypeMapping TypeName="ENVASESModel.Empleo">
-        <MappingFragment StoreEntitySet="Empleos">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="vista_empleados">
-      <EntityTypeMapping TypeName="ENVASESModel.vista_empleados">
-        <MappingFragment StoreEntitySet="vista_empleados">
-          <ScalarProperty Name="ID_EMPLEADO" ColumnName="ID_EMPLEADO" />
-          <ScalarProperty Name="NOMBRE_EMPLEADO" ColumnName="NOMBRE_EMPLEADO" />
-          <ScalarProperty Name="NOMBRE_EMPLEO" ColumnName="NOMBRE_EMPLEO" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="proc_Almacen_Articulo" FunctionName="ENVASESModel.Store.proc_Almacen_Articulo">
       <ResultMapping>
         <ComplexTypeMapping TypeName="ENVASESModel.proc_Almacen_Articulo_Result">
@@ -76,5 +22,59 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="Almacen_Articulo">
+      <EntityTypeMapping TypeName="ENVASESModel.Almacen_Articulo">
+        <MappingFragment StoreEntitySet="Almacen_Articulo">
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Fecha_Salida" ColumnName="Fecha_Salida" />
+          <ScalarProperty Name="Fecha_Entrada" ColumnName="Fecha_Entrada" />
+          <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
+          <ScalarProperty Name="Id_Almacen" ColumnName="Id_Almacen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Almacenes">
+      <EntityTypeMapping TypeName="ENVASESModel.Almacene">
+        <MappingFragment StoreEntitySet="Almacenes">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Articulos">
+      <EntityTypeMapping TypeName="ENVASESModel.Articulo">
+        <MappingFragment StoreEntitySet="Articulos">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empleados">
+      <EntityTypeMapping TypeName="ENVASESModel.Empleado">
+        <MappingFragment StoreEntitySet="Empleados">
+          <ScalarProperty Name="Id_Empleo" ColumnName="Id_Empleo" />
+          <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empleos">
+      <EntityTypeMapping TypeName="ENVASESModel.Empleo">
+        <MappingFragment StoreEntitySet="Empleos">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vista_empleados">
+      <EntityTypeMapping TypeName="ENVASESModel.vista_empleados">
+        <MappingFragment StoreEntitySet="vista_empleados">
+          <ScalarProperty Name="NOMBRE_EMPLEO" ColumnName="NOMBRE_EMPLEO" />
+          <ScalarProperty Name="NOMBRE_EMPLEADO" ColumnName="NOMBRE_EMPLEADO" />
+          <ScalarProperty Name="ID_EMPLEADO" ColumnName="ID_EMPLEADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

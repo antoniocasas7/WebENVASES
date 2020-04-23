@@ -15,6 +15,7 @@ namespace MIMODELO_envases
 
     public partial class Almacen_Articulo
     {
+
         [Key]
         [Required(ErrorMessage = " El Id es requerido")]
         public int Id_Almacen { get; set; }
@@ -23,10 +24,12 @@ namespace MIMODELO_envases
         [Required(ErrorMessage = " El Id es requerido")]
         public int Id_Articulo { get; set; }
 
-       
+
         [Required(ErrorMessage = " La fecha de entrada es requerida")]
         public System.DateTime Fecha_Entrada { get; set; }
         public Nullable<System.DateTime> Fecha_Salida { get; set; }
         public Nullable<decimal> Cantidad { get; set; }
+        public virtual Almacene Almacene { get; set; }
+        public virtual Articulo Articulo { get; set; }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ENVASESModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ENVASESModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Almacen_Articulo">
           <Key>
             <PropertyRef Name="Id_Almacen" />
@@ -56,6 +56,30 @@ advertencia 6002: La tabla o vista 'ENVASES.dbo.vista_empleados' no tiene defini
           <Property Name="NOMBRE_EMPLEADO" Type="nvarchar" MaxLength="30" />
           <Property Name="NOMBRE_EMPLEO" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <Association Name="FK__Almacen_A__Id_Al__4D94879B">
+          <End Role="Almacenes" Type="Self.Almacenes" Multiplicity="1" />
+          <End Role="Almacen_Articulo" Type="Self.Almacen_Articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Almacenes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Almacen_Articulo">
+              <PropertyRef Name="Id_Almacen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Almacen_A__Id_Ar__4CA06362">
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="1" />
+          <End Role="Almacen_Articulo" Type="Self.Almacen_Articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Almacen_Articulo">
+              <PropertyRef Name="Id_Articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_EMPLEOS">
           <End Role="Empleos" Type="Self.Empleos" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -89,99 +113,49 @@ advertencia 6002: La tabla o vista 'ENVASES.dbo.vista_empleados' no tiene defini
     [vista_empleados].[NOMBRE_EMPLEO] AS [NOMBRE_EMPLEO]
     FROM [dbo].[vista_empleados] AS [vista_empleados]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK__Almacen_A__Id_Al__4D94879B" Association="Self.FK__Almacen_A__Id_Al__4D94879B">
+            <End Role="Almacenes" EntitySet="Almacenes" />
+            <End Role="Almacen_Articulo" EntitySet="Almacen_Articulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Almacen_A__Id_Ar__4CA06362" Association="Self.FK__Almacen_A__Id_Ar__4CA06362">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="Almacen_Articulo" EntitySet="Almacen_Articulo" />
+          </AssociationSet>
           <AssociationSet Name="FK_EMPLEOS" Association="Self.FK_EMPLEOS">
             <End Role="Empleos" EntitySet="Empleos" />
             <End Role="Empleados" EntitySet="Empleados" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ENVASESModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Almacen_Articulo">
-          <Key>
-            <PropertyRef Name="Id_Almacen" />
-            <PropertyRef Name="Id_Articulo" />
-          </Key>
-          <Property Name="Id_Almacen" Type="Int32" Nullable="false" />
-          <Property Name="Id_Articulo" Type="Int32" Nullable="false" />
-          <Property Name="Fecha_Entrada" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Fecha_Salida" Type="DateTime" Precision="0" />
-          <Property Name="Cantidad" Type="Decimal" Precision="18" Scale="0" />
-        </EntityType>
-        <EntityType Name="Almacene">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Articulo">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Empleado">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Id_Empleo" Type="Int32" />
-          <NavigationProperty Name="Empleo" Relationship="Self.FK_EMPLEOS" FromRole="Empleados" ToRole="Empleos" />
-        </EntityType>
-        <EntityType Name="Empleo">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Empleados" Relationship="Self.FK_EMPLEOS" FromRole="Empleos" ToRole="Empleados" />
-        </EntityType>
-        <EntityType Name="vista_empleados">
-          <Key>
-            <PropertyRef Name="ID_EMPLEADO" />
-          </Key>
-          <Property Name="ID_EMPLEADO" Type="Int32" Nullable="false" />
-          <Property Name="NOMBRE_EMPLEADO" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="NOMBRE_EMPLEO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <Association Name="FK_EMPLEOS">
-          <End Role="Empleos" Type="Self.Empleo" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Empleados" Type="Self.Empleado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empleos">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Empleados">
-              <PropertyRef Name="Id_Empleo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="ENVASESEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Almacen_Articulo" EntityType="Self.Almacen_Articulo" />
-          <EntitySet Name="Almacenes" EntityType="Self.Almacene" />
-          <EntitySet Name="Articulos" EntityType="Self.Articulo" />
-          <EntitySet Name="Empleados" EntityType="Self.Empleado" />
-          <EntitySet Name="Empleos" EntityType="Self.Empleo" />
-          <EntitySet Name="vista_empleados" EntityType="Self.vista_empleados" />
-          <AssociationSet Name="FK_EMPLEOS" Association="Self.FK_EMPLEOS">
-            <End Role="Empleos" EntitySet="Empleos" />
-            <End Role="Empleados" EntitySet="Empleados" />
-          </AssociationSet>
           <FunctionImport Name="proc_Almacen_Articulo" ReturnType="Collection(ENVASESModel.proc_Almacen_Articulo_Result)">
-            <Parameter Name="Id_Almacen" Mode="In" Type="Int32" />
+          <Parameter Name="Id_Almacen" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="proc_empleados" ReturnType="Collection(ENVASESModel.proc_empleados_Result)">
-            <Parameter Name="Nombre_Empleado" Mode="In" Type="String" />
+          <Parameter Name="Nombre_Empleado" Mode="In" Type="String" />
           </FunctionImport>
-        </EntityContainer>
+          <EntitySet Name="Almacen_Articulo" EntityType="ENVASESModel.Almacen_Articulo" />
+          <EntitySet Name="Almacenes" EntityType="ENVASESModel.Almacene" />
+          <EntitySet Name="Articulos" EntityType="ENVASESModel.Articulo" />
+          <EntitySet Name="Empleados" EntityType="ENVASESModel.Empleado" />
+          <EntitySet Name="Empleos" EntityType="ENVASESModel.Empleo" />
+          <EntitySet Name="vista_empleados" EntityType="ENVASESModel.vista_empleados" />
+          <AssociationSet Name="FK__Almacen_A__Id_Al__4D94879B" Association="ENVASESModel.FK__Almacen_A__Id_Al__4D94879B">
+            <End Role="Almacene" EntitySet="Almacenes" />
+            <End Role="Almacen_Articulo" EntitySet="Almacen_Articulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Almacen_A__Id_Ar__4CA06362" Association="ENVASESModel.FK__Almacen_A__Id_Ar__4CA06362">
+            <End Role="Articulo" EntitySet="Articulos" />
+            <End Role="Almacen_Articulo" EntitySet="Almacen_Articulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEOS" Association="ENVASESModel.FK_EMPLEOS">
+            <End Role="Empleo" EntitySet="Empleos" />
+            <End Role="Empleado" EntitySet="Empleados" />
+          </AssociationSet>
+          </EntityContainer>
         <ComplexType Name="proc_Almacen_Articulo_Result">
           <Property Type="Int32" Name="Id_Almacen" Nullable="false" />
           <Property Type="Int32" Name="Id_Articulo" Nullable="false" />
@@ -195,66 +169,105 @@ advertencia 6002: La tabla o vista 'ENVASES.dbo.vista_empleados' no tiene defini
           <Property Type="String" Name="Apellidos" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="Id_Empleo" Nullable="true" />
         </ComplexType>
-      </Schema>
+        <EntityType Name="Almacen_Articulo">
+          <Key>
+            <PropertyRef Name="Id_Almacen" />
+            <PropertyRef Name="Id_Articulo" />
+          </Key>
+          <Property Name="Id_Almacen" Type="Int32" Nullable="false" />
+          <Property Name="Id_Articulo" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_Entrada" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Fecha_Salida" Type="DateTime" Precision="0" />
+          <Property Name="Cantidad" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Almacene" Relationship="ENVASESModel.FK__Almacen_A__Id_Al__4D94879B" FromRole="Almacen_Articulo" ToRole="Almacene" />
+          <NavigationProperty Name="Articulo" Relationship="ENVASESModel.FK__Almacen_A__Id_Ar__4CA06362" FromRole="Almacen_Articulo" ToRole="Articulo" />
+        </EntityType>
+        <EntityType Name="Almacene">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Almacen_Articulo" Relationship="ENVASESModel.FK__Almacen_A__Id_Al__4D94879B" FromRole="Almacene" ToRole="Almacen_Articulo" />
+        </EntityType>
+        <EntityType Name="Articulo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Almacen_Articulo" Relationship="ENVASESModel.FK__Almacen_A__Id_Ar__4CA06362" FromRole="Articulo" ToRole="Almacen_Articulo" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id_Empleo" Type="Int32" />
+          <NavigationProperty Name="Empleo" Relationship="ENVASESModel.FK_EMPLEOS" FromRole="Empleado" ToRole="Empleo" />
+        </EntityType>
+        <EntityType Name="Empleo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Empleados" Relationship="ENVASESModel.FK_EMPLEOS" FromRole="Empleo" ToRole="Empleado" />
+        </EntityType>
+        <EntityType Name="vista_empleados">
+          <Key>
+            <PropertyRef Name="ID_EMPLEADO" />
+          </Key>
+          <Property Name="ID_EMPLEADO" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE_EMPLEADO" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NOMBRE_EMPLEO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__Almacen_A__Id_Al__4D94879B">
+          <End Type="ENVASESModel.Almacene" Role="Almacene" Multiplicity="1" />
+          <End Type="ENVASESModel.Almacen_Articulo" Role="Almacen_Articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Almacene">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Almacen_Articulo">
+              <PropertyRef Name="Id_Almacen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Almacen_A__Id_Ar__4CA06362">
+          <End Type="ENVASESModel.Articulo" Role="Articulo" Multiplicity="1" />
+          <End Type="ENVASESModel.Almacen_Articulo" Role="Almacen_Articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Almacen_Articulo">
+              <PropertyRef Name="Id_Articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEOS">
+          <End Type="ENVASESModel.Empleo" Role="Empleo" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ENVASESModel.Empleado" Role="Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="Id_Empleo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ENVASESModelStoreContainer" CdmEntityContainer="ENVASESEntities">
-          <EntitySetMapping Name="Almacen_Articulo">
-            <EntityTypeMapping TypeName="ENVASESModel.Almacen_Articulo">
-              <MappingFragment StoreEntitySet="Almacen_Articulo">
-                <ScalarProperty Name="Id_Almacen" ColumnName="Id_Almacen" />
-                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
-                <ScalarProperty Name="Fecha_Entrada" ColumnName="Fecha_Entrada" />
-                <ScalarProperty Name="Fecha_Salida" ColumnName="Fecha_Salida" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Almacenes">
-            <EntityTypeMapping TypeName="ENVASESModel.Almacene">
-              <MappingFragment StoreEntitySet="Almacenes">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Articulos">
-            <EntityTypeMapping TypeName="ENVASESModel.Articulo">
-              <MappingFragment StoreEntitySet="Articulos">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Empleados">
-            <EntityTypeMapping TypeName="ENVASESModel.Empleado">
-              <MappingFragment StoreEntitySet="Empleados">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
-                <ScalarProperty Name="Id_Empleo" ColumnName="Id_Empleo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Empleos">
-            <EntityTypeMapping TypeName="ENVASESModel.Empleo">
-              <MappingFragment StoreEntitySet="Empleos">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vista_empleados">
-            <EntityTypeMapping TypeName="ENVASESModel.vista_empleados">
-              <MappingFragment StoreEntitySet="vista_empleados">
-                <ScalarProperty Name="ID_EMPLEADO" ColumnName="ID_EMPLEADO" />
-                <ScalarProperty Name="NOMBRE_EMPLEADO" ColumnName="NOMBRE_EMPLEADO" />
-                <ScalarProperty Name="NOMBRE_EMPLEO" ColumnName="NOMBRE_EMPLEO" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="proc_Almacen_Articulo" FunctionName="ENVASESModel.Store.proc_Almacen_Articulo">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ENVASESModel.proc_Almacen_Articulo_Result">
@@ -276,6 +289,60 @@ advertencia 6002: La tabla o vista 'ENVASES.dbo.vista_empleados' no tiene defini
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Almacen_Articulo">
+            <EntityTypeMapping TypeName="ENVASESModel.Almacen_Articulo">
+              <MappingFragment StoreEntitySet="Almacen_Articulo">
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Fecha_Salida" ColumnName="Fecha_Salida" />
+                <ScalarProperty Name="Fecha_Entrada" ColumnName="Fecha_Entrada" />
+                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
+                <ScalarProperty Name="Id_Almacen" ColumnName="Id_Almacen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Almacenes">
+            <EntityTypeMapping TypeName="ENVASESModel.Almacene">
+              <MappingFragment StoreEntitySet="Almacenes">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Articulos">
+            <EntityTypeMapping TypeName="ENVASESModel.Articulo">
+              <MappingFragment StoreEntitySet="Articulos">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleados">
+            <EntityTypeMapping TypeName="ENVASESModel.Empleado">
+              <MappingFragment StoreEntitySet="Empleados">
+                <ScalarProperty Name="Id_Empleo" ColumnName="Id_Empleo" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleos">
+            <EntityTypeMapping TypeName="ENVASESModel.Empleo">
+              <MappingFragment StoreEntitySet="Empleos">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vista_empleados">
+            <EntityTypeMapping TypeName="ENVASESModel.vista_empleados">
+              <MappingFragment StoreEntitySet="vista_empleados">
+                <ScalarProperty Name="NOMBRE_EMPLEO" ColumnName="NOMBRE_EMPLEO" />
+                <ScalarProperty Name="NOMBRE_EMPLEADO" ColumnName="NOMBRE_EMPLEADO" />
+                <ScalarProperty Name="ID_EMPLEADO" ColumnName="ID_EMPLEADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

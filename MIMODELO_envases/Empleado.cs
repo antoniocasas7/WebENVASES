@@ -20,7 +20,6 @@ namespace MIMODELO_envases
         [Required(ErrorMessage = " El Id es requerido")]
         public int Id { get; set; }
 
-     
         [StringLength(30)]
         [Required(ErrorMessage = " El Nombre es requerido")]
         [DisplayName("Nombre Empleado")]
@@ -31,7 +30,8 @@ namespace MIMODELO_envases
         [DisplayName("Apellidos Empleado")]
         public string Apellidos { get; set; }
         public Nullable<int> Id_Empleo { get; set; }
-    
+
         public virtual Empleo Empleo { get; set; }
+
     }
 }
