@@ -1,36 +1,63 @@
 ﻿@model IEnumerable<MIMODELO_envases.Empleo>
+@using GridMvc.Html
 
-@{
-    ViewBag.Title = "Index";
-    <!-- Layout = "~/Views/Shared/_Layout.cshtml";-->
-    Layout = "~/Views/Shared/_LayoutEnvases.cshtml";
-}
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/css")" rel="stylesheet" />
 
-<h2>Index</h2>
+</head>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @*  @Html.DisplayNameFor(model => model.name);*@
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
+<body style="background-color:lavenderblush">
+    @{
+        ViewBag.Controller = "Empleos";
+        Layout = "~/Views/Shared/_LayoutEnvases.cshtml";
     }
 
-</table>
+    <div class="panel panel-default">
+        <div class="panel-heading">LISTA DE EMPLEOS</div>
+        <div class="text-right">
+            <input type="button" style="right:auto" class="btn btn-primary" value="NUEVO" onclick="location.href='@Url.Action("Create", "Empleos")'" />
+        </div>
+        <div class="panel-body">
+            <div class="code-cut">
+                @Html.Grid(Model).Columns(columns =>
+           {
+               columns.Add(c => c.Id).Titled("Identifiacion").SetWidth(5).Filterable(true);
+               columns.Add(c => c.Nombre).Titled("Nombre").Filterable(true);
+               columns.Add()
+                   .Encoded(false)
+                   .Sanitized(false)
+                   .SetWidth(30)
+                   .RenderValueAs(o => Html.ActionLink("Editar", "Edit", new { id = o.Id }));
+               columns.Add()
+                   .Encoded(false)
+                   .Sanitized(false)
+                   .SetWidth(30)
+                   .RenderValueAs(o => Html.ActionLink("Detalles", "Details", new { id = o.Id }));
+               columns.Add()
+                   .Encoded(false)
+                   .Sanitized(false)
+                   .SetWidth(30)
+                   .RenderValueAs(o => Html.ActionLink("Eliminar", "Delete", new { id = o.Id }));
+           }).WithPaging(10).Sortable(true)
+            </div>
+        </div>
+    </div>
+
+    <script src="@Url.Content("~/Scripts/jquery-1.10.2.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/gridmvc.min.js")"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+

@@ -15,7 +15,7 @@ namespace WEB_MVC_FRONT.Controllers
     /// ESTE CONTROLADOR ESTA HECHO TIRANDO DE LAS FUNCIONES QUE ESTAN EN LA CLASE PARCIAL
     /// EN VEZ DE DECLARAR LAS OPERACIONES DE LAS BASE DE DATOS AQUI EN EL CONTROLADOR , LAS HE HECHO EN LAS CLASES DELO MODELO
     /// </summary>
-    public class EmpleosController : Controller
+    public class EmpleosController : Controller 
     {
         private ENVASESEntities db = new ENVASESEntities();
 
@@ -24,7 +24,7 @@ namespace WEB_MVC_FRONT.Controllers
         // GET: Empleos
         public async Task<ActionResult> Index()
         {
-             // return View(await db.Empleos.ToListAsync());
+            // return View(await db.Empleos.ToListAsync());
              return View(await varEmpleo.List());
         }
 
