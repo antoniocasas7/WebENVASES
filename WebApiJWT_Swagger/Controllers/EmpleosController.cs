@@ -17,6 +17,7 @@ namespace WebApiJWT_Swagger.Controllers
     /// Controlador Login para autentificacion de usuarios
     /// </summary>
     [Authorize]
+    //[AllowAnonymous]
     [RoutePrefix("api/Empleos")]
     public class EmpleosController : ApiController
     {
@@ -50,9 +51,10 @@ namespace WebApiJWT_Swagger.Controllers
         /// 
         // GET: api/Empleos/5
         [HttpGet]
-        [Route("GetEmpleo")]
-        [ResponseType(typeof(Empleo))]
-        public async Task<IHttpActionResult> GetEmpleo(int id)
+       // [Route("GetEmpleo")]  // En este caso el id se pasa como parametro en la llamada postman: http://localhost:44387/api/Empleos/GetEmpleo?id=6
+        [Route("GetEmpleo/{id:int}")]  // El Route de arriba funciona tambien , hago este para tener las 2 formas
+        [ResponseType(typeof(Empleo))]   //     lo que cambia es al llamar en postman esta el id va en la URI: http://localhost:44387/api/Empleos/GetEmpleo/6
+        public async Task<IHttpActionResult> GetEmpleo([FromUri] int id)
         {
             Empleo empleo = await db.Empleos.FindAsync(id);
             if (empleo == null)
@@ -67,16 +69,16 @@ namespace WebApiJWT_Swagger.Controllers
         /// Edita un empleo segun el Id pasado como parametro y el empleo
         /// </summary>       
         /// <param name="id"> Id del empleo a editar</param> <seealso cref="int"></seealso>
-        /// <param name="empleo"> Id del empleo a editar</param>  <seealso cref="Empleo"></seealso>
+        /// <param name="empleo"> Datos actualizados del empleo a editar</param>  <seealso cref="Empleo"></seealso>
         /// <returns></returns> 
         /// <response code="401">Unauthorized. No se ha indicado o es incorrecto el Token JWT de acceso.</response>              
         /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
         /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>
-        // PUT: api/Empleos/5
-        [HttpPut]
+        // POST: api/Empleos?id=6   http://localhost:44387/api/Empleos/GetEmpleo?id=6
+        //  [HttpPost]
         [Route("EditEmpleo")]
         [ResponseType(typeof(IHttpActionResult))]
-        public async Task<IHttpActionResult> EditEmpleo(int id, Empleo empleo)
+        public async Task<IHttpActionResult> EditEmpleo([FromUri] int id, [FromBody] Empleo empleo)
         {
             if (!ModelState.IsValid)
             {
@@ -110,9 +112,9 @@ namespace WebApiJWT_Swagger.Controllers
         }
 
         /// <summary>
-        /// Añade o crea un Empleo
+        /// Crea un Empleo
         /// </summary>       
-        /// <param name="empleo"> Id del empleo a editar</param>  <seealso cref="Empleo"></seealso>
+        /// <param name="empleo"> Datos del empleo a crear</param>  <seealso cref="Empleo"></seealso>
         /// <returns></returns> 
         /// <response code="401">Unauthorized. No se ha indicado o es incorrecto el Token JWT de acceso.</response>              
         /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
@@ -122,7 +124,7 @@ namespace WebApiJWT_Swagger.Controllers
         [Route("AddEmpleo")]
      
         [ResponseType(typeof(Empleo))]
-        public async Task<IHttpActionResult> AddEmpleo(Empleo empleo)
+        public async Task<IHttpActionResult> AddEmpleo([FromBody] Empleo empleo)
         {
             if (!ModelState.IsValid)
             {
@@ -147,7 +149,7 @@ namespace WebApiJWT_Swagger.Controllers
         [HttpDelete]
         [Route("DeleteEmpleo")]
         [ResponseType(typeof(Empleo))]
-        public async Task<IHttpActionResult> DeleteEmpleo(int id)
+        public async Task<IHttpActionResult> DeleteEmpleo([FromUri] int id)
         {
             Empleo empleo = await db.Empleos.FindAsync(id);
             if (empleo == null)

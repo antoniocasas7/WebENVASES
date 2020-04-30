@@ -80,9 +80,10 @@ namespace WebApiJWT_Swagger
 
                         // HABILITAMOS LA AUTENTICACIÓN JWT.
                         c.ApiKey("Authorization")
-                        .Description("Introduce el Token JWT aquí.")
+                        .Description("Bearer ") // Itroduce el token
                         .Name("Bearer")
                         .In("header");
+          
 
 
                         //

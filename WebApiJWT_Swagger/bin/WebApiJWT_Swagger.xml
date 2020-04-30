@@ -511,7 +511,7 @@
             Edita un empleo segun el Id pasado como parametro y el empleo
             </summary>       
             <param name="id"> Id del empleo a editar</param> <seealso cref="T:System.Int32"></seealso>
-            <param name="empleo"> Id del empleo a editar</param>  <seealso cref="T:MIMODELO_envases.Empleo"></seealso>
+            <param name="empleo"> Datos actualizados del empleo a editar</param>  <seealso cref="T:MIMODELO_envases.Empleo"></seealso>
             <returns></returns> 
             <response code="401">Unauthorized. No se ha indicado o es incorrecto el Token JWT de acceso.</response>              
             <response code="200">OK. Devuelve el objeto solicitado.</response>        
@@ -519,9 +519,9 @@
         </member>
         <member name="M:WebApiJWT_Swagger.Controllers.EmpleosController.AddEmpleo(MIMODELO_envases.Empleo)">
             <summary>
-            Añade o crea un Empleo
+            Crea un Empleo
             </summary>       
-            <param name="empleo"> Id del empleo a editar</param>  <seealso cref="T:MIMODELO_envases.Empleo"></seealso>
+            <param name="empleo"> Datos del empleo a crear</param>  <seealso cref="T:MIMODELO_envases.Empleo"></seealso>
             <returns></returns> 
             <response code="401">Unauthorized. No se ha indicado o es incorrecto el Token JWT de acceso.</response>              
             <response code="200">OK. Devuelve el objeto solicitado.</response>        
