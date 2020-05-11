@@ -79,12 +79,15 @@ namespace WebApiJWT_Swagger
                         // NOTE: You must also configure 'EnableApiKeySupport' below in the SwaggerUI section
 
                         // HABILITAMOS LA AUTENTICACIÓN JWT.
-                        c.ApiKey("Authorization")
-                        .Description("Bearer ") // Itroduce el token
-                        .Name("Bearer")
-                        .In("header");
-          
+                        //c.ApiKey("Authoritation")
+                        //.Description("Bearer + Token ") // Itroduce el token
+                        //.Name("Authoritation")
+                        //.In("header");
 
+                        c.ApiKey("Authorization")
+                       .Description("Introduce el Token JWT aquí.")
+                       .Name("Bearer")
+                       .In("header");
 
                         //
                         //c.OAuth2("oauth2")
@@ -271,7 +274,7 @@ namespace WebApiJWT_Swagger
                         // "apiKeyIn" can either be "query" or "header"
                         //
                         // HABILITAMOS LA AUTENTICACIÓN JWT EN LA INTERFAZ.
-                        c.EnableApiKeySupport("apiKey", "header");
+                        c.EnableApiKeySupport("Authorization", "header");
                     });
         }
     }

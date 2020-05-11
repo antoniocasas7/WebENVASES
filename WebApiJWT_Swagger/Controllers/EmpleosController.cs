@@ -17,7 +17,7 @@ namespace WebApiJWT_Swagger.Controllers
     /// Controlador Login para autentificacion de usuarios
     /// </summary>
     [Authorize]
-    //[AllowAnonymous]
+  //  [AllowAnonymous]
     [RoutePrefix("api/Empleos")]
     public class EmpleosController : ApiController
     {
@@ -51,8 +51,8 @@ namespace WebApiJWT_Swagger.Controllers
         /// 
         // GET: api/Empleos/5
         [HttpGet]
-       // [Route("GetEmpleo")]  // En este caso el id se pasa como parametro en la llamada postman: http://localhost:44387/api/Empleos/GetEmpleo?id=6
-        [Route("GetEmpleo/{id:int}")]  // El Route de arriba funciona tambien , hago este para tener las 2 formas
+        [Route("GetEmpleo")]  // En este caso el id se pasa como parametro en la llamada postman: http://localhost:44387/api/Empleos/GetEmpleo?id=6
+       // [Route("GetEmpleo/{id:int}")]  // El Route de arriba funciona tambien , hago este para tener las 2 formas
         [ResponseType(typeof(Empleo))]   //     lo que cambia es al llamar en postman esta el id va en la URI: http://localhost:44387/api/Empleos/GetEmpleo/6
         public async Task<IHttpActionResult> GetEmpleo([FromUri] int id)
         {
